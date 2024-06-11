@@ -1,30 +1,39 @@
-# React + TypeScript + Vite
+# Props
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Props are used to pass data from parent to child components in React. Props are read-only and immutable.
+- In typescript: To specify the type of props, we can use the interface or type keyword. To make a prop optional, we can use the question mark (?) after the prop name.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
+```tsx
+interface Props {
+  name: string;
+  age?: number;
 }
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- In the above example, the name prop is required and the age prop is optional. Now to use the props in the component, we can use the following syntax:
+
+```tsx
+const Greet: React.FC<Props> = ({ name, age }) => {
+  return (
+    <div>
+      <h1>
+        Hello {name} {age}
+      </h1>
+    </div>
+  );
+};
+```
+
+- For optional props, we can use the default value as shown below:
+
+```tsx
+const Greet: React.FC<Props> = ({ name, age = 20 }) => {
+  return (
+    <div>
+      <h1>
+        Hello {name} {age}
+      </h1>
+    </div>
+  );
+};
+```
