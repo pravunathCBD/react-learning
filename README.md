@@ -75,3 +75,72 @@ const NamesList = () => {
   );
 };
 ```
+
+# Events Handling
+
+- In React, events are triggered by the user interaction with the application, such as clicking a button, hovering over an element, or submitting a form. We can handle events in React using the camelCase naming convention, such as `onClick`, `onChange`, `onSubmit`, etc.
+
+- To handle events in React, we can pass a function as a prop to the event handler. The function will be called when the event is triggered.
+
+```tsx
+const handleClick = () => {
+  console.log('Button clicked');
+};
+```
+
+Let's say we want to use the event object to get the value of the input field when the button is clicked. We can pass the event object as an argument to the event handler function.
+
+```tsx
+const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  console.log(e.target);
+};
+```
+
+# Passing data from child to parent component
+
+- In React, data can be passed from a child component to a parent component using a callback function. The parent component can pass a function as a prop to the child component, and the child component can call the function to pass data to the parent component.
+
+- Let's create a child component called `ChildComponent` that has an input field and a button. When the button is clicked, the child component will pass the value of the input field to the parent component.
+
+```tsx
+interface Props {
+  handleCallback: (data: string) => void;
+}
+
+const ChildComponent: React.FC<Props> = ({ handleCallback }) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleClick = () => {
+    handleCallback(inputValue);
+  };
+
+  return (
+    <div>
+      <input
+        type='text'
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <button onClick={handleClick}>Submit</button>
+    </div>
+  );
+};
+```
+
+- Now, let's create a parent component called `ParentComponent` that will receive the data from the child component and display it.
+
+```tsx
+const ParentComponent = () => {
+  const handleCallback = (data: string) => {
+    console.log(data);
+  };
+
+  return (
+    <div>
+      <ChildComponent handleCallback={handleCallback} />
+    </div>
+  );
+};
+```
+
+- In the `ParentComponent`, we pass the `handleCallback` function as a prop to the `ChildComponent`. When the button is clicked in the `ChildComponent`, the `handleCallback` function is called with the input field value as an argument.
