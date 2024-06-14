@@ -144,3 +144,66 @@ const ParentComponent = () => {
 ```
 
 - In the `ParentComponent`, we pass the `handleCallback` function as a prop to the `ChildComponent`. When the button is clicked in the `ChildComponent`, the `handleCallback` function is called with the input field value as an argument.
+
+# Conditional Rendering
+
+- In React, we can conditionally render components or elements based on a condition using the ternary operator, logical && operator, or if statement.
+
+- Let's say we want to render a component based on a condition. We can use the ternary operator to conditionally render the component.
+
+```tsx
+const Greet = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+  return isLoggedIn ? <h1>Welcome User</h1> : <h1>Welcome Guest</h1>;
+};
+```
+
+- We can also use the logical && operator to conditionally render a component.
+
+```tsx
+const Greet = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+  return isLoggedIn && <h1>Welcome User</h1>;
+};
+```
+
+- We can also use the if statement to conditionally render a component.
+
+```tsx
+const Greet = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+  if (isLoggedIn) {
+    return <h1>Welcome User</h1>;
+  } else {
+    return <h1>Welcome Guest</h1>;
+  }
+};
+```
+
+# State
+
+- State is the reactive data that a component can maintain and update. State is used to store data that can change over time, such as user input, form data, or the result of an API call. State is immutable and can only be updated using the `setter` method returned by the `useState` hook.
+
+- To use state in a functional component, we can use the `useState` hook provided by React. The `useState` hook returns an array with two elements: the current state value and a setter function to update the state value.
+
+```tsx
+const [count, setCount] = useState(0); // initial state value is 0
+```
+
+- In the above example, we are using the `useState` hook to create a state variable called `count` with an initial value of `0`. We are also using the `setCount` function to update the `count` state value.
+
+- To update the state value, we can call the setter function with the new value.
+
+```tsx
+setCount((prev) => prev + 1);
+```
+
+- To read the state value, we can use the state variable directly.
+
+```tsx
+return (
+  <div>
+    <h1>{count}</h1>
+    <button onClick={() => setCount((prev) => prev + 1)}>Increment</button>
+  </div>
+);
+```
+
+- In the above example, we are rendering the `count` state value in an `h1` element. When the button is clicked, the `setCount` function is called to update the `count` state value.

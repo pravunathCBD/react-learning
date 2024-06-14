@@ -1,4 +1,5 @@
 import ListUsers from './components/ListUsers';
+import StateComponent from './components/StateComponent';
 // import PropComponent from './components/PropComponent';
 import { users } from './utils/mock';
 
@@ -26,6 +27,8 @@ const App = () => {
       >
         Cool button
       </button>
+
+      <StateComponent />
     </div>
   );
 };
