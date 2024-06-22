@@ -207,3 +207,75 @@ return (
 ```
 
 - In the above example, we are rendering the `count` state value in an `h1` element. When the button is clicked, the `setCount` function is called to update the `count` state value.
+
+# Hooks
+
+- Hooks are functions that let you use state and other React features in functional components.
+- There are several built-in hooks provided by React, such as `useState`, `useEffect`, `useContext`, `useReducer`, `useRef`, etc.
+- Rules of Hooks:
+  - Only call hooks at the top level of your functional component.
+  - Only call hooks from React functional components or custom hooks.
+  - Don't call hooks inside loops, conditions, or nested functions.
+  - Hooks start with the word `use`.
+
+# useEffect Hook
+
+- The `useEffect` hook is used to perform side effects in functional components. Side effects can include data fetching, subscriptions, or manually changing the DOM in React components.
+- The `useEffect` hook takes two arguments: a function that contains the side effect and an optional array of dependencies.
+- The function passed to the `useEffect` hook will run after the component has rendered.
+- The optional array of dependencies is used to specify when the side effect should run. If the array is empty, the side effect will run only once after the initial render. If the array contains values, the side effect will run whenever one of the values changes.
+
+```tsx
+useEffect(() => {
+  // side effect
+}, [dependencies]);
+```
+
+- Let's say we want to fetch data from an API when the component mounts. We can use the `useEffect` hook to fetch the data.
+
+```tsx
+const [data, setData] = useState([]);
+
+useEffect(() => {
+  fetch('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => response.json())
+    .then((data) => setData(data));
+}, []);
+```
+
+- In the above example, we are using the `useEffect` hook to fetch data from the JSONPlaceholder API when the component mounts. We are passing an empty array as the second argument to the `useEffect` hook, which means the side effect will run only once after the initial render.
+
+# useMemo Hook
+
+- The `useMemo` hook is used to memoize the result of a function. Memoization is an optimization technique used to cache the result of a function so that the function does not have to be re-executed if the input values are the same.
+- The `useMemo` hook takes two arguments: a function that returns the memoized value and an array of dependencies.
+- The function passed to the `useMemo` hook will be called only when one of the dependencies changes. If the dependencies do not change, the memoized value will be returned.
+
+```tsx
+const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+```
+
+# useCallback Hook
+
+- The `useCallback` hook is used to memoize a callback function. It is similar to the `useMemo` hook, but it is used for functions instead of values.
+- The `useCallback` hook takes two arguments: a callback function and an array of dependencies.
+- The function passed to the `useCallback` hook will be memoized and will only be re-created if one of the dependencies changes.
+
+```tsx
+const memoizedCallback = useCallback(() => {
+  doSomething(a, b);
+}, [a, b]);
+```
+
+# useRef Hook
+
+- The `useRef` hook is used to create a mutable reference that can be used to store a reference to a DOM element or a value that persists between renders.
+- The `useRef` hook returns a mutable object with a `current` property that can be used to store the reference.
+
+```tsx
+const inputRef = useRef<HTMLInputElement>(null);
+
+return <input ref={inputRef} />;
+```
+
+- In the above example, we are using the `useRef` hook to create a reference to an input element. We are passing the `inputRef` object to the `ref` attribute of the input element.

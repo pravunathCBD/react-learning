@@ -1,3 +1,4 @@
+import HooksComponent from './components/HooksComponent';
 import ListUsers from './components/ListUsers';
 import StateComponent from './components/StateComponent';
 // import PropComponent from './components/PropComponent';
@@ -29,6 +30,8 @@ const App = () => {
       </button>
 
       <StateComponent />
+
+      <HooksComponent />
     </div>
   );
 };
