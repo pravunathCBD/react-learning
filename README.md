@@ -279,3 +279,123 @@ return <input ref={inputRef} />;
 ```
 
 - In the above example, we are using the `useRef` hook to create a reference to an input element. We are passing the `inputRef` object to the `ref` attribute of the input element.
+
+# Controlled Components
+
+- In React, a controlled component is a component that controls the value of its input elements. The value of the input element is controlled by the component's state, and the component's state is updated when the input element's value changes.
+
+- To create a controlled component, we need to set the value of the input element to the state value and handle the `onChange` event to update the state value.
+
+```tsx
+const [name, setName] = useState('');
+
+return (
+  <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
+);
+```
+
+- In the above example, we are creating a controlled input element. The value of the input element is set to the `name` state value, and the `onChange` event is used to update the `name` state value.
+
+# Uncontrolled Components
+
+- In React, an uncontrolled component is a component that does not control the value of its input elements. The value of the input element is controlled by the DOM, and the component does not maintain the state of the input element.
+
+- To create an uncontrolled component, we need to remove the `value` attribute from the input element and use a `ref` to get the input element's value.
+
+```tsx
+const inputRef = useRef<HTMLInputElement>(null);
+
+return <input type='text' ref={inputRef} />;
+```
+
+- In the above example, we are creating an uncontrolled input element. We are using the `useRef` hook to create a reference to the input element, and we can get the input element's value using the `inputRef.current.value` property.
+
+# Handling Forms
+
+- In React, forms are used to collect user input. We can handle forms in React using controlled components or uncontrolled components.
+
+- To handle forms in React, we can use the `onChange` event to update the state value when the input element's value changes.
+
+```tsx
+const [name, setName] = useState('');
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  console.log(name
+    email,
+    password);
+};
+
+return (
+  <form onSubmit={handleSubmit}>
+    <input
+      type='text'
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+    />
+    <input
+      type='email'
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+    />
+    <input
+      type='password'
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+    />
+    <button type='submit'>Submit</button>
+  </form>
+);
+```
+
+- In the above example, we are handling a form in React using controlled components. We are using the `onChange` event to update the state value when the input element's value changes. We are also using the `onSubmit` event to handle the form submission.
+
+- But the problem with the above approach is that we have to create a separate state variable and event handler for each input element. To avoid this, we can use a single state variable to store the form data.
+
+```tsx
+const [formData, setFormData] = useState({
+  name: '',
+  email: '',
+  password: '',
+});
+
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value,
+  });
+};
+
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  console.log(formData);
+};
+
+return (
+  <form onSubmit={handleSubmit}>
+    <input
+      type='text'
+      name='name'
+      value={formData.name}
+      onChange={handleChange}
+    />
+    <input
+      type='email'
+      name='email'
+      value={formData.email}
+      onChange={handleChange}
+    />
+    <input
+      type='password'
+      name='password'
+      value={formData.password}
+      onChange={handleChange}
+    />
+    <button type='submit'>Submit</button>
+  </form>
+);
+```
+
+- In the above example, we are using a single state variable called `formData` to store the form data. We are using the `name` attribute of the input element to identify the form field and update the state value accordingly.

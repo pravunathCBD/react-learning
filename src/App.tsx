@@ -1,3 +1,5 @@
+import React from 'react';
+import FormComponent from './components/FormComponent';
 import HooksComponent from './components/HooksComponent';
 import ListUsers from './components/ListUsers';
 import StateComponent from './components/StateComponent';
@@ -9,6 +11,33 @@ const App = () => {
     console.log('Button clicked!', e.currentTarget);
   };
 
+  const [formData, setFormData] = React.useState<{
+    name: string;
+    email: string;
+    password: string;
+  }>({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(formData);
+    setFormData({
+      name: '',
+      email: '',
+      password: '',
+    });
+  };
+
   return (
     <div>
       <p className='font-medium'>Test app</p>
@@ -16,6 +45,12 @@ const App = () => {
         title='Hello, world!'
         // description='This is a test description.'
       /> */}
+
+      <FormComponent
+        formData={formData}
+        onFormChange={onFormChange}
+        onSubmitHandler={onSubmitHandler}
+      />
 
       <ListUsers
         users={users}
