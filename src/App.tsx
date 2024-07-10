@@ -1,42 +1,63 @@
+// import React from 'react';
+// import FormComponent from './components/FormComponent';
+// import HooksComponent from './components/HooksComponent';
+// import ListUsers from './components/ListUsers';
+// import StateComponent from './components/StateComponent';
+// // import PropComponent from './components/PropComponent';
+// import { users } from './utils/mock';
+
 import React from 'react';
-import FormComponent from './components/FormComponent';
-import HooksComponent from './components/HooksComponent';
-import ListUsers from './components/ListUsers';
-import StateComponent from './components/StateComponent';
-// import PropComponent from './components/PropComponent';
-import { users } from './utils/mock';
+import { IPost } from './types/entities';
+import { fetchPosts } from './apis/requests/posts.requests';
 
 const App = () => {
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('Button clicked!', e.currentTarget);
-  };
+  const [posts, setPosts] = React.useState<IPost[]>([]);
 
-  const [formData, setFormData] = React.useState<{
-    name: string;
-    email: string;
-    password: string;
-  }>({
-    name: '',
-    email: '',
-    password: '',
-  });
+  React.useEffect(() => {
+    const fetchPostsData = async () => {
+      try {
+        const postsData = await fetchPosts();
+        setPosts(postsData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+    fetchPostsData();
+  }, []);
 
-  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(formData);
-    setFormData({
-      name: '',
-      email: '',
-      password: '',
-    });
-  };
+  console.log(posts);
+
+  // const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   console.log('Button clicked!', e.currentTarget);
+  // };
+
+  // const [formData, setFormData] = React.useState<{
+  //   name: string;
+  //   email: string;
+  //   password: string;
+  // }>({
+  //   name: '',
+  //   email: '',
+  //   password: '',
+  // });
+
+  // const onFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
+  // const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   console.log(formData);
+  //   setFormData({
+  //     name: '',
+  //     email: '',
+  //     password: '',
+  //   });
+  // };
 
   return (
     <div>
@@ -46,7 +67,7 @@ const App = () => {
         // description='This is a test description.'
       /> */}
 
-      <FormComponent
+      {/* <FormComponent
         formData={formData}
         onFormChange={onFormChange}
         onSubmitHandler={onSubmitHandler}
@@ -66,7 +87,7 @@ const App = () => {
 
       <StateComponent />
 
-      <HooksComponent />
+      <HooksComponent /> */}
     </div>
   );
 };

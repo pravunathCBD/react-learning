@@ -399,3 +399,151 @@ return (
 ```
 
 - In the above example, we are using a single state variable called `formData` to store the form data. We are using the `name` attribute of the input element to identify the form field and update the state value accordingly.
+
+# Promises and async / await
+
+- A promise is an object that represents the eventual completion or failure of an asynchronous operation. A promise can be in one of three states: pending, fulfilled, or rejected.
+- Promises are used to handle asynchronous operations in JavaScript, such as fetching data from an API, reading a file, or making a network request.
+- Promises can be created using the `Promise` constructor, which takes a function as an argument. The function takes two arguments: `resolve` and `reject`. The `resolve` function is used to fulfill the promise, and the `reject` function is used to reject the promise.
+
+```tsx
+const promise = new Promise((resolve, reject) => {
+  // asynchronous operation
+  if (success) {
+    resolve('Data fetched successfully');
+  } else {
+    reject('Error fetching data');
+  }
+});
+```
+
+- We can use the `then` method to handle the fulfillment of a promise and the `catch` method to handle the rejection of a promise.
+
+```tsx
+promise
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+```
+
+- The `async` and `await` keywords are used to work with promises in a more synchronous way. The `async` keyword is used to define an asynchronous function, and the `await` keyword is used to wait for a promise to be fulfilled.
+
+```tsx
+const fetchData = async () => {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+```
+
+- In the above example, we are using the `async` and `await` keywords to fetch data from the JSONPlaceholder API. The `fetch` function returns a promise, and we are using the `await` keyword to wait for the promise to be fulfilled.
+
+# Defining interfaces
+
+- In TypeScript, interfaces are used to define the shape of an object. An interface can be used to define the properties and methods of an object, and it can be used to enforce type checking in TypeScript.
+
+- To define an interface in TypeScript, we can use the `interface` keyword followed by the interface name and the properties of the interface.
+
+```tsx
+interface IUser {
+  name: string;
+  age: number;
+}
+```
+
+- In the above example, we are defining an interface called `IUser` with two properties: `name` of type `string` and `age` of type `number`. We can use the `IUser` interface to enforce type checking on an object.
+
+```tsx
+const user: IUser = {
+  name: 'John Doe',
+  age: 30,
+};
+```
+
+- Interfaces can be extended to create new interfaces that inherit the properties of the base interface.
+
+```tsx
+interface IAdmin extends IUser {
+  role: string;
+}
+```
+
+- In the above example, we are extending the `IUser` interface to create a new interface called `IAdmin` with an additional property `role` of type `string`.
+
+# Fetching data from an API
+
+- In React, we can fetch data from an API using the `fetch` function or a library like Axios. The `fetch` function is a built-in JavaScript function that is used to make network requests and fetch data from a server.
+
+- The `fetch` function returns a promise that resolves to the `Response` object representing the response to the request.
+
+```tsx
+fetch('https://jsonplaceholder.typicode.com/posts')
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error(error));
+```
+
+- In the above example, we are using the `fetch` function to fetch data from the JSONPlaceholder API. We are using the `then` method to handle the response and convert it to JSON format.
+
+- We can also use the `async` and `await` keywords to fetch data from an API in a more synchronous way.
+
+```tsx
+const fetchData = async () => {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+```
+
+- In the above example, we are using the `async` and `await` keywords to fetch data from the JSONPlaceholder API. The `fetch` function returns a promise, and we are using the `await` keyword to wait for the promise to be fulfilled.
+
+# Updating state when API data is fetched
+
+- When fetching data from an API in React, we can update the component's state with the fetched data using the `useState` hook.
+
+```tsx
+const [data, setData] = useState([]);
+
+useEffect(() => {
+  fetch('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => response.json())
+    .then((data) => setData(data));
+}, []);
+```
+
+- In the above example, we are using the `useState` hook to create a state variable called `data` to store the fetched data. We are using the `useEffect` hook to fetch data from the JSONPlaceholder API when the component mounts.
+
+- We can also the above example using the `async` and `await` keywords.
+
+```tsx
+const [data, setData] = useState([]);
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        'https://jsonplaceholder.typicode.com/posts'
+      );
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchData();
+}, []);
+```
+
+- In the above example, we are using the `async` and `await` keywords to fetch data from the JSONPlaceholder API. We are using the `useState` hook to create a state variable called `data` to store the fetched data.
