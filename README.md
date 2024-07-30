@@ -43,7 +43,7 @@ const Greet: React.FC<Props> = ({ name, age = 20 }) => {
 - To render a list of items in React, we can use the map() method to iterate over the array and return a list of elements. The map() method creates a new array with the results of calling a provided function on every element in the array.
 
 ```tsx
-const names = ['Bruce', 'Clark', 'Diana'];
+const names = ["Bruce", "Clark", "Diana"];
 
 const NamesList = () => {
   return (
@@ -60,9 +60,9 @@ It's a good idea to add a unique key prop to each element when rendering a list 
 
 ```tsx
 const names = [
-  { id: 1, name: 'Bruce' },
-  { id: 2, name: 'Clark' },
-  { id: 3, name: 'Diana' },
+  { id: 1, name: "Bruce" },
+  { id: 2, name: "Clark" },
+  { id: 3, name: "Diana" },
 ];
 
 const NamesList = () => {
@@ -84,7 +84,7 @@ const NamesList = () => {
 
 ```tsx
 const handleClick = () => {
-  console.log('Button clicked');
+  console.log("Button clicked");
 };
 ```
 
@@ -108,7 +108,7 @@ interface Props {
 }
 
 const ChildComponent: React.FC<Props> = ({ handleCallback }) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const handleClick = () => {
     handleCallback(inputValue);
@@ -117,7 +117,7 @@ const ChildComponent: React.FC<Props> = ({ handleCallback }) => {
   return (
     <div>
       <input
-        type='text'
+        type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
@@ -237,7 +237,7 @@ useEffect(() => {
 const [data, setData] = useState([]);
 
 useEffect(() => {
-  fetch('https://jsonplaceholder.typicode.com/posts')
+  fetch("https://jsonplaceholder.typicode.com/posts")
     .then((response) => response.json())
     .then((data) => setData(data));
 }, []);
@@ -287,10 +287,10 @@ return <input ref={inputRef} />;
 - To create a controlled component, we need to set the value of the input element to the state value and handle the `onChange` event to update the state value.
 
 ```tsx
-const [name, setName] = useState('');
+const [name, setName] = useState("");
 
 return (
-  <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
+  <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
 );
 ```
 
@@ -305,7 +305,7 @@ return (
 ```tsx
 const inputRef = useRef<HTMLInputElement>(null);
 
-return <input type='text' ref={inputRef} />;
+return <input type="text" ref={inputRef} />;
 ```
 
 - In the above example, we are creating an uncontrolled input element. We are using the `useRef` hook to create a reference to the input element, and we can get the input element's value using the `inputRef.current.value` property.
@@ -356,9 +356,9 @@ return (
 
 ```tsx
 const [formData, setFormData] = useState({
-  name: '',
-  email: '',
-  password: '',
+  name: "",
+  email: "",
+  password: "",
 });
 
 const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -376,24 +376,24 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 return (
   <form onSubmit={handleSubmit}>
     <input
-      type='text'
-      name='name'
+      type="text"
+      name="name"
       value={formData.name}
       onChange={handleChange}
     />
     <input
-      type='email'
-      name='email'
+      type="email"
+      name="email"
       value={formData.email}
       onChange={handleChange}
     />
     <input
-      type='password'
-      name='password'
+      type="password"
+      name="password"
       value={formData.password}
       onChange={handleChange}
     />
-    <button type='submit'>Submit</button>
+    <button type="submit">Submit</button>
   </form>
 );
 ```
@@ -410,9 +410,9 @@ return (
 const promise = new Promise((resolve, reject) => {
   // asynchronous operation
   if (success) {
-    resolve('Data fetched successfully');
+    resolve("Data fetched successfully");
   } else {
-    reject('Error fetching data');
+    reject("Error fetching data");
   }
 });
 ```
@@ -434,7 +434,7 @@ promise
 ```tsx
 const fetchData = async () => {
   try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
     const data = await response.json();
     console.log(data);
   } catch (error) {
@@ -462,7 +462,7 @@ interface IUser {
 
 ```tsx
 const user: IUser = {
-  name: 'John Doe',
+  name: "John Doe",
   age: 30,
 };
 ```
@@ -484,7 +484,7 @@ interface IAdmin extends IUser {
 - The `fetch` function returns a promise that resolves to the `Response` object representing the response to the request.
 
 ```tsx
-fetch('https://jsonplaceholder.typicode.com/posts')
+fetch("https://jsonplaceholder.typicode.com/posts")
   .then((response) => response.json())
   .then((data) => console.log(data))
   .catch((error) => console.error(error));
@@ -497,7 +497,7 @@ fetch('https://jsonplaceholder.typicode.com/posts')
 ```tsx
 const fetchData = async () => {
   try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
     const data = await response.json();
     console.log(data);
   } catch (error) {
@@ -516,7 +516,7 @@ const fetchData = async () => {
 const [data, setData] = useState([]);
 
 useEffect(() => {
-  fetch('https://jsonplaceholder.typicode.com/posts')
+  fetch("https://jsonplaceholder.typicode.com/posts")
     .then((response) => response.json())
     .then((data) => setData(data));
 }, []);
@@ -533,7 +533,7 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        'https://jsonplaceholder.typicode.com/posts'
+        "https://jsonplaceholder.typicode.com/posts"
       );
       const data = await response.json();
       setData(data);
@@ -547,3 +547,77 @@ useEffect(() => {
 ```
 
 - In the above example, we are using the `async` and `await` keywords to fetch data from the JSONPlaceholder API. We are using the `useState` hook to create a state variable called `data` to store the fetched data.
+
+# POST data to an API
+
+- To POST data to an API using the `fetch` function or a library like Axios, we can use the `POST` method. The `POST` request looks like this:
+
+```tsx
+fetch("https://jsonplaceholder.typicode.com/posts", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    title: "Hello, World!",
+    body: "This is a post request.",
+    userId: 1,
+  }),
+});
+```
+
+- In the above example, we are using the `fetch` function to POST data to the JSONPlaceholder API. We are using the `POST` method to send a request with the following headers and body:
+
+```tsx
+const postData = async () => {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: "Hello, World!",
+        body: "This is a post request.",
+        userId: 1,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+```
+
+# Difference between `PATCH` and `PUT`
+
+- `PATCH` and `PUT` are HTTP methods that are used to update data in an API. `PATCH` is used to update a partial data in an API, while `PUT` is used to replace the entire data in an API.
+
+```tsx
+fetch("https://jsonplaceholder.typicode.com/posts/1", {
+  method: "PATCH",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    title: "Hello, World!",
+  }),
+});
+```
+
+- In the above example, we are using the `PATCH` method to update a partial data in the JSONPlaceholder API. We are using the `PUT` method to replace the entire data in the JSONPlaceholder API.
+
+```tsx
+fetch("https://jsonplaceholder.typicode.com/posts/1", {
+  method: "PUT",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    title: "Hello, World!",
+  }),
+});
+```
+
+- In the above example, we are using the `PUT` method to replace the entire data in the JSONPlaceholder API.
